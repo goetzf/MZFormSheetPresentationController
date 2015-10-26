@@ -199,7 +199,7 @@ CGFloat const MZFormSheetPresentationControllerDefaultAboveKeyboardMargin = 20;
 }
 
 - (CGFloat)topInset {
-    if (CGRectGetWidth(self.view.frame) > CGRectGetHeight(self.view.frame)) {
+    if (CGRectGetWidth(self.presentedView.frame) > CGRectGetHeight(self.presentedView.frame)) {
         return self.landscapeTopInset + [self yCoordinateBelowStatusBar];
     } else {
         return self.portraitTopInset + [self yCoordinateBelowStatusBar];
