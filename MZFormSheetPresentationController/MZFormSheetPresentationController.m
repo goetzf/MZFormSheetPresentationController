@@ -194,14 +194,15 @@ CGFloat const MZFormSheetPresentationControllerDefaultAboveKeyboardMargin = 20;
 }
 
 - (CGFloat)yCoordinateBelowStatusBar {
-    return [UIApplication sharedApplication].statusBarFrame.size.height;
+    // For now, we're using a hard-coded value here since we cannot access UIApplication in share extensions.
+    return 20;
 }
 
 - (CGFloat)topInset {
-    if (UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)) {
-        return self.portraitTopInset + [self yCoordinateBelowStatusBar];
-    } else {
+    if (CGRectGetWidth(self.view.frame) > CGRectGetHeight(self.view.frame)) {
         return self.landscapeTopInset + [self yCoordinateBelowStatusBar];
+    } else {
+        return self.portraitTopInset + [self yCoordinateBelowStatusBar];
     }
 }
 
