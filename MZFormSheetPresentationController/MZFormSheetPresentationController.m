@@ -94,9 +94,14 @@ CGFloat const MZFormSheetPresentationControllerDefaultAboveKeyboardMargin = 20;
 }
 
 - (void)setContentViewSize:(CGSize)contentViewSize {
+    [self setContentViewSize:contentViewSize needsDisplay:YES];
+}
+
+- (void)setContentViewSize:(CGSize)contentViewSize needsDisplay:(BOOL)needsDisplay {
     if (!CGSizeEqualToSize(_contentViewSize, contentViewSize)) {
         _contentViewSize = contentViewSize;
-        [self setupFormSheetViewControllerFrame];
+        if (needsDisplay)
+            [self setupFormSheetViewControllerFrame];
     }
 }
 

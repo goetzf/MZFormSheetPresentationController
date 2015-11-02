@@ -45,8 +45,10 @@ typedef NS_ENUM(NSInteger, MZFormSheetActionWhenKeyboardAppears) {
 
 /**
  *  The preferred size for the container’s content. (required)
+ *  By default, this property requires display.
  */
 @property (nonatomic, assign) CGSize contentViewSize MZ_APPEARANCE_SELECTOR;
+- (void)setContentViewSize:(CGSize)contentViewSize needsDisplay:(BOOL)needsDisplay;
 
 /**
  Distance that the presented form sheet view is inset from the status bar in landscape orientation.
