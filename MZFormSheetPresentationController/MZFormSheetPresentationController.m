@@ -26,7 +26,7 @@
 #import "MZFormSheetPresentationController.h"
 #import <objc/runtime.h>
 #import "MZBlurEffectAdapter.h"
-#import <JGMethodSwizzler/JGMethodSwizzler.h>
+#import "MZMethodSwizzler.h"
 #import "MZFormSheetPresentationContentSizing.h"
 
 CGFloat const MZFormSheetPresentationControllerDefaultAboveKeyboardMargin = 20;
@@ -194,24 +194,31 @@ CGFloat const MZFormSheetPresentationControllerDefaultAboveKeyboardMargin = 20;
 }
 
 - (CGFloat)yCoordinateBelowStatusBar {
+#if TARGET_OS_TV
+    return 0;
+#else
     // For now, we're using a hard-coded value here since we cannot access UIApplication in share extensions.
     return 20;
 }
 
 - (CGFloat)topInset {
+#if TARGET_OS_TV
+    return self.landscapeTopInset;
+#else
     if (CGRectGetWidth(self.presentedView.frame) > CGRectGetHeight(self.presentedView.frame)) {
         return self.landscapeTopInset + [self yCoordinateBelowStatusBar];
     } else {
         return self.portraitTopInset + [self yCoordinateBelowStatusBar];
     }
+#endif
 }
 
 #pragma mark - Transparent Touch
 
 - (void)turnOnTransparentTouch {
     __weak typeof(self) weakSelf = self;
-    [self.containerView swizzleMethod:@selector(pointInside:withEvent:) withReplacement:JGMethodReplacementProviderBlock {
-        return JGMethodReplacement(BOOL, UIView *, CGPoint point, UIEvent *event) {
+    [self.containerView swizzleMethod:@selector(pointInside:withEvent:) withReplacement:MZMethodReplacementProviderBlock {
+        return MZMethodReplacement(BOOL, UIView *, CGPoint point, UIEvent *event) {
             if (!CGRectContainsPoint(weakSelf.presentedView.frame, point)){
                 return NO;
             }
