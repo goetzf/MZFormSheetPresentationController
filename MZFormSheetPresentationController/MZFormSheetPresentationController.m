@@ -468,7 +468,7 @@ CGFloat const MZFormSheetPresentationControllerDefaultAboveKeyboardMargin = 20;
         }
         
     } else if (self.shouldCenterVertically) {
-        formSheetRect.origin.y = CGRectGetMidY(self.containerView.bounds) - formSheetRect.size.height/2;
+        formSheetRect.origin.y = ([self yCoordinateBelowStatusBar] + self.containerView.bounds.size.height)/2 - formSheetRect.size.height/2;
     } else {
         formSheetRect.origin.y = self.topInset;
     }
