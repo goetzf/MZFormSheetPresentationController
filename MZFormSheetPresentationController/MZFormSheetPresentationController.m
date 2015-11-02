@@ -199,6 +199,7 @@ CGFloat const MZFormSheetPresentationControllerDefaultAboveKeyboardMargin = 20;
 #else
     // For now, we're using a hard-coded value here since we cannot access UIApplication in share extensions.
     return 20;
+#endif
 }
 
 - (CGFloat)topInset {
