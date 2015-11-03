@@ -29,7 +29,8 @@
 #import "MZMethodSwizzler.h"
 #import "MZFormSheetPresentationContentSizing.h"
 
-CGFloat const MZFormSheetPresentationControllerDefaultAboveKeyboardMargin = 20;
+CGFloat const MZFormSheetPresentationControllerDefaultAboveKeyboardMargin   = 20;
+CGFloat const MZFormSheetPresentationControllerMinimumInset                 = 30;
 
 @interface MZFormSheetPresentationController () <UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIView *dimmingView;
@@ -452,6 +453,10 @@ CGFloat const MZFormSheetPresentationControllerDefaultAboveKeyboardMargin = 20;
 - (CGRect)formSheetViewControllerFrame {
     CGRect formSheetRect = self.presentedView.frame;
     formSheetRect.size = self.internalContentViewSize;
+    
+    // Add minimum insets
+    formSheetRect.size.width = MIN(CGRectGetWidth(formSheetRect), CGRectGetWidth(self.containerView.bounds) - MZFormSheetPresentationControllerMinimumInset);
+    formSheetRect.size.height = MIN(CGRectGetHeight(formSheetRect), CGRectGetHeight(self.containerView.bounds) - MZFormSheetPresentationControllerMinimumInset);
     
     if (self.shouldCenterHorizontally) {
         formSheetRect.origin.x = CGRectGetMidX(self.containerView.bounds) - formSheetRect.size.width/2;
