@@ -30,6 +30,7 @@
 #import "MZFormSheetPresentationContentSizing.h"
 
 CGFloat const MZFormSheetPresentationControllerDefaultAboveKeyboardMargin   = 20;
+CGFloat const MZFormSheetPresentationControllerDefaultAboveCenterMargin     = 40;
 CGFloat const MZFormSheetPresentationControllerMinimumInset                 = 30;
 
 @interface MZFormSheetPresentationController () <UIGestureRecognizerDelegate>
@@ -486,7 +487,9 @@ CGFloat const MZFormSheetPresentationControllerMinimumInset                 = 30
         }
         
     } else if (self.shouldCenterVertically) {
-        formSheetRect.origin.y = CGRectGetMidY(self.containerView.bounds) - formSheetRect.size.height/2 - [self yCoordinateBelowStatusBar];
+        formSheetRect.origin.y = CGRectGetMidY(self.containerView.bounds) - formSheetRect.size.height/2;
+        if (CGRectGetMinY(formSheetRect) > 2*MZFormSheetPresentationControllerDefaultAboveCenterMargin)
+            formSheetRect.origin.y -= MZFormSheetPresentationControllerDefaultAboveCenterMargin;
     } else {
         formSheetRect.origin.y = self.topInset;
     }
