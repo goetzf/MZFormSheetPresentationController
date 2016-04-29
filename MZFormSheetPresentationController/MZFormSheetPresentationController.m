@@ -413,8 +413,8 @@ CGFloat const MZFormSheetPresentationControllerMinimumInset                 = 30
 
 - (void)willShowKeyboardNotification:(NSNotification *)notification {
     CGRect screenRect = [[notification userInfo][UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
-    screenRect.size.height = [UIScreen mainScreen].bounds.size.height - screenRect.size.height;
+	
+	screenRect.size.height = screenRect.origin.y;
     screenRect.size.width = [UIScreen mainScreen].bounds.size.width;
     screenRect.origin.y = 0;
     
