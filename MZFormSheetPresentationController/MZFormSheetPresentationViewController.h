@@ -31,7 +31,7 @@
 #import "MZFormSheetPresentationViewControllerInteractiveTransitioning.h"
 #import "MZFormSheetPresentationContentSizing.h"
 
-extern CGFloat const MZFormSheetPresentationViewControllerDefaultAnimationDuration;
+extern CGFloat MZFormSheetPresentationViewControllerDefaultAnimationDuration;
 
 typedef void(^MZFormSheetPresentationViewControllerCompletionHandler)(UIViewController * __nonnull contentViewController);
 
