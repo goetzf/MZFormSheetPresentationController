@@ -469,7 +469,9 @@ CGFloat const MZFormSheetPresentationControllerMinimumInset                 = 30
         if (screenRect.size.height > CGRectGetHeight(formSheetRect)) {
             switch (self.movementActionWhenKeyboardAppears) {
                 case MZFormSheetActionWhenKeyboardAppearsCenterVertically:
-                    formSheetRect.origin.y = ([self yCoordinateBelowStatusBar] + screenRect.size.height - formSheetRect.size.height) / 2 - screenRect.origin.y;
+					formSheetRect.origin.y = ([self yCoordinateBelowStatusBar] + screenRect.size.height - formSheetRect.size.height) / 2;
+					if (CGRectGetMinY(formSheetRect) > 2*MZFormSheetPresentationControllerDefaultAboveCenterMargin)
+						formSheetRect.origin.y -= MZFormSheetPresentationControllerDefaultAboveCenterMargin;
                     break;
                 case MZFormSheetActionWhenKeyboardAppearsMoveToTop:
                     formSheetRect.origin.y = [self yCoordinateBelowStatusBar];
