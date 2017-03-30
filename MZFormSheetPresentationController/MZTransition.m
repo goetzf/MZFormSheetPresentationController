@@ -33,6 +33,9 @@ CGFloat const MZPresentationTransitionDefaultDropDownDuration = 0.4;
 
 CGFloat MZFormSheetPresentationViewControllerDefaultAnimationDuration = 0.35;
 
+@interface MZTransition () <CAAnimationDelegate>
+@end
+
 @implementation MZTransition
 
 #pragma mark - Class methods
