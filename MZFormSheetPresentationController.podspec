@@ -11,7 +11,6 @@ Pod::Spec.new do |s|
   s.dependency 'MZAppearance'
 
   s.source_files = 'MZFormSheetPresentationController/*.{h,m}'
-  s.pod_target_xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'OSATOMIC_DEPRECATED=0' }
 
   s.ios.deployment_target = "8.0"
   s.tvos.deployment_target = "9.0"
