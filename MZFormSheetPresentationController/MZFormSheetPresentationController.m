@@ -424,11 +424,11 @@ CGFloat const MZFormSheetPresentationControllerMinimumInset                 = 30
     UIViewAnimationCurve curve = [[notification.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
     double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
-    [UIView animateWithDuration:duration
+	UIViewAnimationOptions animationOption = (curve << 16); // taken from UIViewAnimationOptionCurveEaseInOut
+	[UIView animateWithDuration:duration
                           delay:0
-                        options:UIViewAnimationOptionBeginFromCurrentState
-                     animations:^{
-                         [UIView setAnimationCurve:curve];
+                        options:UIViewAnimationOptionBeginFromCurrentState|animationOption
+                     animations:^{;
                          [self setupFormSheetViewControllerFrame];
                      } completion:nil];
 }
@@ -439,12 +439,12 @@ CGFloat const MZFormSheetPresentationControllerMinimumInset                 = 30
     
     UIViewAnimationCurve curve = [[notification.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
     double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
+	
+	UIViewAnimationOptions animationOption = (curve << 16); // taken from UIViewAnimationOptionCurveEaseInOut
     [UIView animateWithDuration:duration
                           delay:0
-                        options:UIViewAnimationOptionBeginFromCurrentState
+                        options:UIViewAnimationOptionBeginFromCurrentState|animationOption
                      animations:^{
-                         [UIView setAnimationCurve:curve];
                          [self setupFormSheetViewControllerFrame];
                      } completion:nil];
 }
